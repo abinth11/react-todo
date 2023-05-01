@@ -1,8 +1,7 @@
-import React, { Component } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import List from "./components/List";
 import Alert from "./components/Alert";
 import "./App.css";
-import { useState, useEffect } from "react";
 
 const getLocalStorage = () => {
   let list = localStorage.getItem("list");
@@ -18,6 +17,7 @@ const App = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [editId, setEditId] = useState(null);
   const [alert, setAlert] = useState({ show: false, msg: "", type: "" });
+  const inputRef = useRef(null);
 
   useEffect(() => {
     localStorage.setItem("list", JSON.stringify(list));
@@ -64,13 +64,16 @@ const App = () => {
     showAlert(true, "danger", "Empty List");
     setList([]);
   };
+  function handleClick() {
+    inputRef.current.focus();
+  }
 
   return (
     <section className='section-center'>
       <form onSubmit={handleSubmit}>
         {alert.show && <Alert {...alert} removeAlert={showAlert} list={list} />}
         <h2 style={{ marginBottom: "1.5rem", textAlign: "center" }}>
-        Tasks for Today
+          Tasks for Today
         </h2>
         <div className='mb-3 form'>
           <input
@@ -79,8 +82,11 @@ const App = () => {
             placeholder='Add Your List'
             onChange={(e) => setName(e.target.value)}
             value={name}
+            ref={inputRef}
           />
-          <button type='submit' className='btn btn-success ms-1'>
+          <button type='submit'
+            className='btn btn-success ms-2'
+            onClick={handleClick}>
             {isEditing ? "Edit" : "Add"}
           </button>
         </div>
