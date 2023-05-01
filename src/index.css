@@ -5,55 +5,121 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background:hsl(210, 36%, 96%);
-  color:hsl(209, 61%, 16%)
+  /* background:hsl(210, 36%, 96%); */
+  background: linear-gradient(to bottom, #fff, #f8f8f8, #f0f0f0, #e8e8e8, #e0e0e0);
+  background: linear-gradient(to right, #ffffff, #e0e0e0, #ffff);
+
+
+  color: hsl(209, 61%, 16%)
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-.section{
+
+.list-group-item {
+  border: none;
+  padding: 10px 15px;
+  background-color: #f5f5f5;
+  color: #444;
+}
+
+/* .completed {
+  background-color: #a7a7a7;
+} */
+
+.list-group-item button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.list-group-item button:focus {
+  outline: none;
+}
+
+.list-group-item .tick-btn {
+  color: #3a89dc;
+}
+
+.list-group-item .tick-btn:hover {
+  color: #007bff;
+}
+
+.edit-btn {
+  margin-right: 10px;
+}
+
+.delete-btn {
+  color: #dc3545;
+}
+
+.delete-btn:hover {
+  color: #c82333;
+}
+.list-group>li{
+  margin-left: -10px;
+}
+
+.section {
   padding: 5rem 0;
 }
-.section-center{
+
+.section-center {
   width: 90vw;
-  margin:0 auto;
+  margin: 0 auto;
   max-width: 35rem;
   margin-top: 8rem;
 }
-.section-center{
+
+.section-center {
   background: #ffff;
   border-radius: 1rem;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   transition: all 0.3s linear;
   padding: 2rem;
 }
-.form{
+
+.section-center:hover {
+  transform: scale(1.01)
+}
+
+.form {
   display: flex;
   justify-content: center;
 
 }
-.alert-danger{
-  color:red;
-  background:#f8d7da;
+
+.alert {
+  text-align: center;
 }
-.alert-success{
-  color:green;
-  background:#d4edda;
+
+.alert-danger {
+  color: red;
+  background: #f8d7da;
 }
+
+.alert-success {
+  color: green;
+  background: #d4edda;
+}
+
 .edit-btn,
-.delete-btn{
-background:transparent ;
-border-color: transparent;
-cursor: pointer;
-font-size: 1.0rem;
-margin: 0 0.10rem;
-transition: all 0.3s linear;
+.delete-btn {
+  background: transparent;
+  border-color: transparent;
+  cursor: pointer;
+  font-size: 1.0rem;
+  margin: 0 0.10rem;
+  transition: all 0.3s linear;
 }
-.edit-btn{
+
+.edit-btn {
   color: lightgreen;
 }
-.delete-btn{
+
+.delete-btn {
   color: red;
 }
