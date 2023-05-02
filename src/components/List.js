@@ -3,12 +3,10 @@ import { FaEdit, FaTrash, FaCheck } from "react-icons/fa";
 import RadioButton from "./radioButton";
 
 const List = ({ items, removeItem, editItem }) => {
-  const [completedItems, setCompletedItems] = useState(
-    Array(items.length).fill(false)
-  );
+  const [completedItems, setCompletedItems] = useState({});
 
   const toggleCompleted = (index) => {
-    const updatedCompletedItems = [...completedItems];
+    const updatedCompletedItems = {...completedItems};
     updatedCompletedItems[index] = !updatedCompletedItems[index];
     setCompletedItems(updatedCompletedItems);
   };
@@ -16,9 +14,10 @@ const List = ({ items, removeItem, editItem }) => {
   return (
     <div className='container'>
       <ul className='list-group list-group-flush'>
-        {items.map((item, index) => {
+
+        {items.map((item ) => {
           const { id, title } = item;
-          const isCompleted = completedItems[index];
+          const isCompleted = completedItems[id];
           const listItemStyle = isCompleted
             ? { textDecoration: "line-through", color: "gray" }
             : {};
@@ -33,7 +32,7 @@ const List = ({ items, removeItem, editItem }) => {
               <span className='d-flex flex-grow-1 align-items-center'>
                 <button
                   className='tick-btn'
-                  onClick={() => toggleCompleted(index)}
+                  onClick={() => toggleCompleted(id)}
                 >
                   {isCompleted ? (
                     <FaCheck />
@@ -44,7 +43,7 @@ const List = ({ items, removeItem, editItem }) => {
                       name='radio-group'
                       value='option1'
                       checked={false}
-                      onChange={() => toggleCompleted(index)}
+                      onChange={() => toggleCompleted(id)}
                     />
                   )}
                 </button>

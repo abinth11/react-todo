@@ -18,7 +18,6 @@ const App = () => {
   const [editId, setEditId] = useState(null);
   const [alert, setAlert] = useState({ show: false, msg: "", type: "" });
   const inputRef = useRef(null);
-  console.log(list)
   
   useEffect(() => {
     localStorage.setItem("list", JSON.stringify(list));
@@ -71,7 +70,7 @@ const App = () => {
     showAlert(true, "danger", "List Cleared");
     setList([]);
   };
-  
+
   function handleClick() {
     inputRef.current.focus();
   }
