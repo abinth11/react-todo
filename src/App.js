@@ -18,7 +18,7 @@ const App = () => {
   const [editId, setEditId] = useState(null);
   const [alert, setAlert] = useState({ show: false, msg: "", type: "" });
   const inputRef = useRef(null);
-  
+  console.log(list)
   useEffect(() => {
     localStorage.setItem("list", JSON.stringify(list));
   }, [list]);
@@ -29,26 +29,44 @@ const App = () => {
     if (!name) {
       showAlert(true, "danger", "Please enter something");
     } else if (name && isEditing) {
-      setList(
-        list.map((item) => {
-          if (item.id === editId) {
-            return { ...item, title: name };
-          }
-          return item;
-        })
-      );
-      setName("");
-      setEditId(null);
-      setIsEditing(false);
-      showAlert(true, "success", "Task updated...!");
+      updateItem(name, list)
     } else {
-      showAlert(true, "success", "Task added to the list");
-      const newItem = { id: new Date().getTime().toString(), title: name };
-      setList([...list, newItem]);
-      setName("");
+      addItem(name, list)
     }
   };
 
+  const addItem = (name, list) => {
+    const newItem = { id: new Date().getTime().toString(), title: name };
+    const itemExists = list.some(item => item.title === newItem.title);
+    if (itemExists) {
+      showAlert(true, "danger", `${name} is already exists in the list`);
+      return;
+    }
+    showAlert(true, "success", "Task added to the list");
+    setName("");
+    setList([...list, newItem]);
+  }
+  const updateItem = (name, list) => {
+    const itemExists = list.some(item => item.title === name);
+    if (itemExists) {
+      showAlert(true, "danger", `${name} is already exists in the list`);
+      return;
+    }
+    setList(
+      list.map((item) => {
+        if (item.id === editId) {
+          return { ...item, title: name };
+        }
+        return item;
+      })
+    );
+
+    setName("");
+    setEditId(null);
+    setIsEditing(false);
+    showAlert(true, "success", "Task updated...!");
+
+  }
 
   const showAlert = (show = false, type = "", msg = "") => {
     setAlert({ show, type, msg });
