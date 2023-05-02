@@ -18,10 +18,12 @@ const App = () => {
   const [editId, setEditId] = useState(null);
   const [alert, setAlert] = useState({ show: false, msg: "", type: "" });
   const inputRef = useRef(null);
-
+  console.log(list)
+  
   useEffect(() => {
     localStorage.setItem("list", JSON.stringify(list));
   }, [list]);
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -47,23 +49,29 @@ const App = () => {
       setName("");
     }
   };
+
+
   const showAlert = (show = false, type = "", msg = "") => {
     setAlert({ show, type, msg });
   };
+
   const removeItem = (id) => {
     showAlert(true, "danger", "Task deleted..");
     setList(list.filter((item) => item.id !== id));
   };
+
   const editItem = (id) => {
     const editItem = list.find((item) => item.id === id);
     setIsEditing(true);
     setEditId(id);
     setName(editItem.title);
   };
+
   const clearList = () => {
-    showAlert(true, "danger", "Empty List");
+    showAlert(true, "danger", "List Cleared");
     setList([]);
   };
+  
   function handleClick() {
     inputRef.current.focus();
   }
